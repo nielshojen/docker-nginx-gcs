@@ -1,13 +1,18 @@
+FROM linuxkit/ca-certificates:v0.6 AS ca-certificates
+
+FROM    golang:1.12rc1-alpine AS build
+ENV     CGO_ENABLED 0
+RUN     apk add --no-cache git
+ADD     . /code
+WORKDIR /code
+RUN     go install
+
+
+
 FROM nginx:stable-alpine
 
-ENV GCSPROXY_VERSION=0.3.0
-RUN apk add --no-cache --virtual .build-deps ca-certificates wget \
-  && update-ca-certificates \
-  && wget https://github.com/daichirata/gcsproxy/releases/download/v${GCSPROXY_VERSION}/gcsproxy_${GCSPROXY_VERSION}_amd64_linux -O /usr/local/bin/gcsproxy \
-  && chmod +x /usr/local/bin/gcsproxy \
-  && apk del .build-deps
-
-ADD nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /go/bin/gcs-helper /usr/bin/gcs-helper
+COPY --from=ca-certificates / /
 
 ADD run.sh /run.sh
 RUN chmod +x /run.sh
