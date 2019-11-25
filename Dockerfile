@@ -7,7 +7,12 @@ RUN apk add --no-cache --virtual .build-deps ca-certificates wget \
   && chmod +x /usr/local/bin/gcsproxy \
   && apk del .build-deps
 
+ADD nginx.conf /etc/nginx/conf.d/default.conf
+
 ADD run.sh /run.sh
 RUN chmod +x /run.sh
+
+EXPOSE 80
+EXPOSE 443
 
 CMD ["/run.sh"]
