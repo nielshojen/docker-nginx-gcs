@@ -1,3 +1,3 @@
 #!/bin/sh
 
-/usr/local/bin/gcsproxy
+/usr/local/bin/gcsproxy -v -c /gcs.json
