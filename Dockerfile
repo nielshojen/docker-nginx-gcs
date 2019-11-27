@@ -7,8 +7,6 @@ RUN     git clone https://github.com/nytimes/gcs-helper.git /code
 WORKDIR /code
 RUN     go install
 
-
-
 FROM nginx:stable-alpine
 
 COPY --from=build /go/bin/gcs-helper /usr/bin/gcs-helper
