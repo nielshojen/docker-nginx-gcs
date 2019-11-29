@@ -18,4 +18,12 @@ The following environment variables control the behavior of gcs-helper/nginx:
 | CACHE_MAX_SIZE               | 1g            | No       | Sets the upper limit of the size of the cache                                                           |
 | CACHE_INACTIVE               | 1h            | No       | Specifies how long an item can remain in the cache without being accessed                               |
 
+Requires a GCS json file with credentials for the bucket in question to be mapped to /etc/google-creds.json eg.
+
+```
+ -v /local/path/google-creds.json:/etc/google-creds.json
+```
+
+in your docker command.
+
 ## Use at your own peril
