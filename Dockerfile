@@ -9,6 +9,9 @@ RUN     go install
 
 FROM nginx:stable-alpine
 
+ENV CACHE_MAX_SIZE="1g"
+ENV CACHE_INACTIVE="1h"
+
 COPY --from=build /go/bin/gcs-helper /usr/bin/gcs-helper
 COPY --from=ca-certificates / /
 

@@ -5,7 +5,7 @@ Uses nytimes/gcs-helper and nginx
 
 ## Set in ENV:
 
-The following environment variables control the behavior of gcs-helper:
+The following environment variables control the behavior of gcs-helper/nginx:
 
 | Variable                     | Default value | Required | Description                                                                                             |
 | -----------------------------| ------------- | -------- | --------------------------------------------------------------------------------------------------------|
@@ -15,5 +15,7 @@ The following environment variables control the behavior of gcs-helper:
 | GCS_CLIENT_TIMEOUT           | 2s            | No       | Hard timeout on requests that gcs-helper sends to the Google Storage API                                |
 | GCS_CLIENT_IDLE_CONN_TIMEOUT | 120s          | No       | Maximum duration of idle connections between gcs-helper and the Google Storage API                      |
 | GCS_CLIENT_MAX_IDLE_CONNS    | 10            | No       | Maximum number of idle connections to keep open. This doesn't control the maximum number of connections |
+| CACHE_MAX_SIZE               | 1g            | No       | Sets the upper limit of the size of the cache                                                           |
+| CACHE_INACTIVE               | 1h            | No       | Specifies how long an item can remain in the cache without being accessed                               |
 
 ## Use at your own peril
