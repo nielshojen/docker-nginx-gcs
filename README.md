@@ -1,6 +1,7 @@
 # Docker image that proxies and caches GCP Storage Bucket(s)
 
-Initially thought as a local cache for Munki content
+Initially thought as a local cache for Munki content.
+Uses nytimes/gcs-helper and nginx
 
 ## Set in ENV:
 
@@ -15,4 +16,4 @@ The following environment variables control the behavior of gcs-helper:
 | GCS_CLIENT_IDLE_CONN_TIMEOUT | 120s          | No       | Maximum duration of idle connections between gcs-helper and the Google Storage API                      |
 | GCS_CLIENT_MAX_IDLE_CONNS    | 10            | No       | Maximum number of idle connections to keep open. This doesn't control the maximum number of connections |
 
-Use at your own peril
+## Use at your own peril
