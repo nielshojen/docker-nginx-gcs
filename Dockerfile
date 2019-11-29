@@ -12,10 +12,15 @@ FROM nginx:stable-alpine
 COPY --from=build /go/bin/gcs-helper /usr/bin/gcs-helper
 COPY --from=ca-certificates / /
 
+ADD nginx.conf /etc/nginx/nginx.conf
+RUN rm -f /etc/nginx/conf.d/*
+ADD proxy.conf /etc/nginx/conf.d/proxy.conf
+
 ADD run.sh /run.sh
 RUN chmod +x /run.sh
 
 EXPOSE 80
-EXPOSE 443
+
+VOLUME [ "/cache", "/log" ]
 
 CMD ["/run.sh"]
