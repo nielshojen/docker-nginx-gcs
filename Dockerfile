@@ -9,6 +9,8 @@ RUN     go install
 
 FROM nginx:stable-alpine
 
+ENV PUPPET_VERSION="6.11.1"
+ENV FACTER_VERSION="3.14.5"
 ENV CACHE_MAX_SIZE="1g"
 ENV CACHE_INACTIVE="1h"
 
@@ -19,10 +21,23 @@ ADD nginx.conf /etc/nginx/nginx.conf
 RUN rm -f /etc/nginx/conf.d/*
 ADD proxy.conf /etc/nginx/conf.d/proxy.conf
 
+RUN apk add --no-cache \
+      ca-certificates \
+      pciutils \
+      ruby \
+      ruby-irb \
+      ruby-rdoc \
+      && \
+    echo http://dl-4.alpinelinux.org/alpine/edge/community/ >> /etc/apk/repositories && \
+    apk add --no-cache shadow && \
+    gem install puppet:"$PUPPET_VERSION" facter:"$FACTER_VERSION" && \
+    /usr/bin/puppet module install puppetlabs-apk
+
 ADD run.sh /run.sh
 RUN chmod +x /run.sh
 
 EXPOSE 80
+EXPOSE 443
 
 VOLUME [ "/cache", "/log" ]
 
