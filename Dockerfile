@@ -9,6 +9,7 @@ RUN     go install
 
 FROM nginx:stable-alpine
 
+ENV GOOGLE_APPLICATION_CREDENTIALS="/etc/google-creds.json"
 ENV CACHE_MAX_SIZE="1g"
 ENV CACHE_INACTIVE="1h"
 
