@@ -27,7 +27,7 @@ Requires a GCS json file with credentials for the bucket in question to be mappe
 in your docker command, or map another file with an env:
 
 ```
-GOOGLE_APPLICATION_CREDENTIALS="/path/to/your/creds-file.json"
+GOOGLE_APPLICATION_CREDENTIALS=/path/to/your/creds-file.json
 ```
 
 ## Use at your own peril
