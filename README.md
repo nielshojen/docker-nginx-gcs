@@ -21,9 +21,13 @@ The following environment variables control the behavior of gcs-helper/nginx:
 Requires a GCS json file with credentials for the bucket in question to be mapped to /etc/google-creds.json eg.
 
 ```
- -v /local/path/google-creds.json:/etc/google-creds.json
+ -v /local/path/google-creds.json:/etc/google-creds.json:ro
 ```
 
-in your docker command.
+in your docker command, or map another file with an env:
+
+```
+GOOGLE_APPLICATION_CREDENTIALS=/path/to/your/creds-file.json
+```
 
 ## Use at your own peril
