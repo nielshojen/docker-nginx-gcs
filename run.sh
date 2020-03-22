@@ -4,6 +4,6 @@ sed -i "s/proxy_cache_path.*/proxy_cache_path \/cache levels=1:2 keys_zone=gcs:1
 
 chown -R nginx:root /cache 
 
-/usr/bin/gcs-helper
-
 nginx
+
+/usr/bin/gcs-helper
