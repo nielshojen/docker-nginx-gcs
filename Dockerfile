@@ -21,17 +21,11 @@ ADD nginx.conf /etc/nginx/nginx.conf
 RUN rm -f /etc/nginx/conf.d/*
 ADD proxy.conf /etc/nginx/conf.d/proxy.conf
 
-RUN apk add --no-cache \
-      ca-certificates \
-      pciutils \
-      ruby \
-      ruby-irb \
-      ruby-rdoc \
-      && \
-    echo http://dl-4.alpinelinux.org/alpine/edge/community/ >> /etc/apk/repositories && \
-    apk add --no-cache shadow && \
-    gem install puppet:"$PUPPET_VERSION" facter:"$FACTER_VERSION" && \
-    /usr/bin/puppet module install puppetlabs-apk
+RUN apk add --no-cache ca-certificates pciutils ruby ruby-irb ruby-rdoc
+RUN echo http://dl-4.alpinelinux.org/alpine/edge/community/ >> /etc/apk/repositories
+RUN apk add --no-cache shadow
+RUN gem install puppet:"$PUPPET_VERSION" facter:"$FACTER_VERSION"
+RUN /usr/bin/puppet module install puppetlabs-apk
 
 ADD run.sh /run.sh
 RUN chmod +x /run.sh
